@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+{% if current_user.is_authenticated %}
+<head>
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+   <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static', filename='form.js') }}"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script type="text/javascript" language="JavaScript">
+     function myFunction() {
+         var text = document.getElementById("email").value
+         $.ajax({
+               url: "/suggestions",
+             type: "get",
+             data: {jsdata: text},
+             success: function(response) {
+               $("#place_for_suggestions").html(response);
+             },
+             error: function(xhr) {
+               //Do Something to handle error
+             }
+         })
+      })
+   </script>
+</head>
+
+<body>
+  <script>
+      $(document).ready(function(){
+        $('#MyButton').click(function(){
+          var text = document.getElementById("email").value
+          $.ajax({
+              url: "/suggestions",
+              type: "get",
+              data: {jsdata: text},
+              success: function(response) {
+                $("#place_for_suggestions").html(response);
+              },
+              error: function(xhr) {
+                //Do Something to handle error
+              }
+          })
+        });
+      });
+    </script>
+<p>Enter a valid stock ticker and press the button. Since we are looking for sentiment values in different channels it may take the results to appear up to a minute.</p>
+<form>
+    <input type="text" name="input" id="email">
+    <button id="MyButton">Get Sentiment</button>
+</form>
+<div width=50% height=50%>
+<div id="place_for_suggestions" width="300" height="350"></div>
+</div>
+</body>
+  {% endif %}
+
+{% endblock %}
