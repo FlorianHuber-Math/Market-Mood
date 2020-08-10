@@ -1,6 +1,6 @@
 <h1 align="center"> Market mood (Kaggle Dataset)</h1>
 <p align="center">
-Sentiment detection
+Sentiment analysis of a stock based on tweets and news headlines.
 </p>
 
 ## Instructions
