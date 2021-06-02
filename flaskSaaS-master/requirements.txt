@@ -40,7 +40,7 @@ request==1.0.2
 stripe==2.23.0
 tqdm==4.36.1
 tweepy==3.8.0
-urllib3==1.24.2
+urllib3==1.26.5
 WTForms==2.2.1
 yahoo-finance==1.4.0
 yfinance==0.1.45
